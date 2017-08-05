@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Share your links with ease.{% endblock %}
+
+{% block content %}
+    <h1>Share your links with ease.</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_widget(form.url, {'attr': {'class': 'form-control input-lg', 'placeholder': 'http://www.example.com/'}}) }}
+    </div>
+
+    {{ form_widget(form.create, {'label': 'Create', 'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block before_content %}
+    {% if hasError %}
+        {% include '_includes/alertbox.html.twig' with { 'alert_text': 'Please specify a valid link.' } %}
+    {% endif %}
+{% endblock %}

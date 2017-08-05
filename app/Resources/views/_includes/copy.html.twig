@@ -1,0 +1,5 @@
+{% if context_site_creation_date()|date('Y') == 'now'|date('Y') %}
+    &copy; {{ context_site_title() }} {{ context_site_creation_date()|date('Y') }}
+{% else %}
+    &copy; {{ context_site_title() }} {{ context_site_creation_date()|date('Y') }}-{{ 'now'|date('Y') }}
+{% endif %}

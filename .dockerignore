@@ -1,0 +1,13 @@
+.*
+bower.*
+composer.*
+coverage/
+docker-*
+Dockerfile*
+node_modules/
+Gruntfile.js
+LICENSE
+Makefile
+package.json
+README.md
+web/app_dev.php

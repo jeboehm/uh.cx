@@ -1,0 +1,66 @@
+imports:
+    - { resource: security.yml }
+
+framework:
+    translator:      { fallbacks: [en] }
+    router:
+        resource: "%kernel.root_dir%/config/routing_admin.yml"
+        strict_requirements: true
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.stats:
+            contexts: [admin]
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+
+sonata_admin:
+    dashboard:
+        blocks:
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code:  admin.link
+                    icon:  fa-magic
+                    text:  Links
+                    color: bg-aqua
+
+            -
+                class:    col-lg-3 col-xs-6
+                position: top
+                type:     sonata.admin.block.stats
+                settings:
+                    code:  admin.site
+                    icon:  fa-magic
+                    text:  Sites
+                    color: bg-aqua
+
+services:
+    admin.site:
+        class: AppBundle\Admin\SiteAdmin
+        arguments: [~, AppBundle\Entity\Site, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Site }
+        public: true
+        calls:
+            - [setSiteRepository, ["@app.repository.site"]]
+
+    admin.link:
+        class: AppBundle\Admin\LinkAdmin
+        arguments: [~, AppBundle\Entity\Link, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Link }
+        public: true
+        calls:
+            - [setSiteRepository, ["@app.repository.site"]]
+
+    app.subscriber.doctrine.context_filter:
+        class: AppBundle\Subscriber\Doctrine\ContextFilterSubscriber
+        arguments: ['@doctrine.orm.entity_manager', '@app.service.context']
+
+    app.subscriber.preview_page_redirect:
+        class: AppBundle\Subscriber\PreviewPageRedirectSubscriber
+        arguments: ['@app.service.context']

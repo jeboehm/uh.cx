@@ -1,0 +1,6 @@
+FROM jeboehm/uh.cx:latest
+MAINTAINER Jeffrey Boehm "jeff@ressourcenkonflikt.de"
+
+ENV SYMFONY_DEBUG=1
+
+RUN docker-php-ext-enable xdebug

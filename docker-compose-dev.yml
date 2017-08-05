@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - data-db:/var/lib/mysql
+
+  app:
+    restart: always
+    image: jeboehm/uh.cx:latest-dev
+    links:
+      - db:mysql
+    ports:
+      - "127.0.0.1:80:80"
+    volumes:
+      - appcode-unison-sync:/var/www/html:nocopy
+    environment:
+      - SYMFONY_DEBUG=1
+      - XDEBUG_CONFIG=remote_host=192.168.178.31
+      - PHP_IDE_CONFIG=serverName=www.uhcx.dev
+      - GA_TRACKING=UA-XYZ-1
+      - COOKIE_WARNING=true
+
+volumes:
+  data-db:
+    driver: local
+
+  appcode-unison-sync:
+    external: true

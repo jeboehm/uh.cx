@@ -1,0 +1,8 @@
+{
+  "name": "uh.cx",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "cookieconsent": "^3.0.4",
+    "clipboard": "^1.7.1"
+  }
+}

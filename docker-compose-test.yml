@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+
+  app:
+    image: jeboehm/uh.cx:latest-dev
+    restart: always
+    links:
+      - db:mysql
+
+  coverage:
+    image: jeboehm/uh.cx:latest-dev
+    links:
+      - db:mysql
+    volumes:
+      - ./coverage:/coverage:rw

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info{% endblock %}
+
+{% block content %}
+    <h1>Info</h1>
+
+    {% block info_short %}
+        <div class="form-group">
+            <label for="normal">Short</label>
+
+            <div class="input-group">
+                <input class="form-control linkinfo"
+                       name="link-short" id="link-short" type="text" value="{{ link|link_short_url }}" readonly>
+
+                <span class="input-group-btn">
+                <button class="btn btn-default clipboardbutton" type="button"
+                        data-clipboard-target="#link-short">
+                    <span class="glyphicon glyphicon-share"></span> Copy to clipboard
+                </button>
+            </span>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block info_preview %}
+        <div class="form-group">
+            <label for="normal">Preview</label>
+
+            <div class="input-group">
+                <input class="form-control linkinfo"
+                       name="link-preview" id="link-preview" type="text" value="{{ link|link_preview_url }}" readonly>
+
+                <span class="input-group-btn">
+                <button class="btn btn-default clipboardbutton" type="button"
+                        data-clipboard-target="#link-preview">
+                    <span class="glyphicon glyphicon-share"></span> Copy to clipboard
+                </button>
+            </span>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block info_original %}
+        <div class="form-group">
+            <label for="original">Original</label>
+
+            <div class="input-group">
+                <input class="form-control linkinfo"
+                       name="link-original" id="link-original" type="text" value="{{ link.url }}" readonly>
+
+                <span class="input-group-btn">
+                <button class="btn btn-default clipboardbutton" type="button"
+                        data-clipboard-target="#link-original">
+                    <span class="glyphicon glyphicon-share"></span> Copy to clipboard
+                </button>
+            </span>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block info_qr_container %}
+        <div class="row">
+            {% block info_qr_short %}
+                <div class="col-md-6">
+                    <h4>QR: Short</h4>
+
+                    <div class="thumbnail">
+                        <img src="{{ link|link_short_url|link_qr }}">
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block info_qr_preview %}
+                <div class="col-md-6">
+                    <h4>QR: Preview</h4>
+
+                    <div class="thumbnail">
+                        <img src="{{ link|link_preview_url|link_qr }}">
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
+{% endblock %}

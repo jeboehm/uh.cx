@@ -1,0 +1,19 @@
+{% if cookie_warning == true %}
+    <script>
+      window.addEventListener("load", function() {
+        window.cookieconsent.initialise({
+          "palette": {
+            "popup": {
+              "background": "#eaeaea",
+              "text": "#000000"
+            },
+            "button": {
+              "background": "#2563ab",
+              "text": "#ffffff"
+            }
+          },
+          "theme": "edgeless"
+        })
+      });
+    </script>
+{% endif %}

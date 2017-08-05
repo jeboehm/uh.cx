@@ -1,0 +1,32 @@
+<?php
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__ . '/app')
+    ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/tests')
+    ->in(__DIR__ . '/web');
+$header = <<<EOF
+This file is part of the uh.cx package.
+
+(c) Jeffrey Boehm <https://github.com/jeboehm>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+EOF;
+return PhpCsFixer\Config::create()
+    ->setUsingCache(false)
+    ->setRules(
+        [
+            '@PSR2'                  => true,
+            '@Symfony'               => true,
+            'header_comment'         => ['header' => $header, 'separate' => 'bottom', 'commentType' => 'PHPDoc'],
+            'no_useless_else'        => true,
+            'no_useless_return'      => true,
+            'ordered_class_elements' => true,
+            'ordered_imports'        => true,
+            'phpdoc_order'           => true,
+            'concat_space'           => ['spacing' => 'one'],
+            'array_syntax'           => ['syntax' => 'short'],
+            'declare_strict_types'   => true,
+        ]
+    )
+    ->setFinder($finder);

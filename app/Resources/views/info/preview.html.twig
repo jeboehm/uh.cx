@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info{% endblock %}
+
+{% block content %}
+    <h1>Preview</h1>
+
+    <p>This short link will take you to:</p>
+    <pre>{{ link.url }}</pre>
+
+    <a href="{{ link|link_short_url }}" class="btn btn-lg btn-primary">
+        Go there!
+    </a>
+
+    <a href="{{ url('app_info_info', { name: link.name }) }}" class="btn btn-info">
+        More information
+    </a>
+{% endblock %}
