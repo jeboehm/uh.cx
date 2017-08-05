@@ -85,4 +85,26 @@ class ApiControllerTest extends AbstractFunctionalTestCase
 
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $client->getResponse()->getStatusCode());
     }
+
+    public function testBackwardCompatibilityForCreate(): void
+    {
+        $request = ['url' => 'http://example.com/', 'reuse' => false];
+        $client = static::createDefaultClient();
+        $client->request(
+            'POST',
+            $this->generateUrl($client, 'app_api_compat_create'),
+            [],
+            [],
+            [],
+            json_encode($request)
+        );
+
+        /** @var JsonResponse $response */
+        $response = $client->getResponse();
+        $this->assertInstanceOf(JsonResponse::class, $response);
+
+        $decoded = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('UrlDirect', $decoded);
+    }
 }

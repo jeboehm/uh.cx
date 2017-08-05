@@ -57,6 +57,14 @@ class ApiController extends Controller
         return new Response('Please specify a valid link.', Response::HTTP_BAD_REQUEST);
     }
 
+    /**
+     * @Route("/api/create/json", name="app_api_compat_create")
+     */
+    public function compatCreateAction(): Response
+    {
+        return $this->forward('AppBundle:Api:create');
+    }
+
     private function getApiResponseStruct(Link $link): ResponseStruct
     {
         $urlService = $this->container->get('app.service.url');
