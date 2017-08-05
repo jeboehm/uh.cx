@@ -99,7 +99,5 @@ docker-assets:
 	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html node make assets
 
 coveralls:
-	wget -c -nc --retry-connrefused --tries=0 https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
-	chmod +x coveralls.phar
-	./coveralls.phar --version
-	./coveralls.phar -v
+	vendor/bin/coveralls --version
+	vendor/bin/coveralls -v
