@@ -8,6 +8,12 @@ env:
   global:
     - DOCKER_COMPOSE_VERSION=1.7.1
 
+cache:
+  directories:
+    - app/Resources/assets/vendor
+    - node_modules
+    - vendor
+
 before_install:
  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
  - chmod +x docker-compose
