@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 $loader = require __DIR__ . '/../app/autoload.php';
 Debug::enable();
 
+Request::setTrustedProxies(['172.16.0.0/12']);
 $request = Request::createFromGlobals();
 
 $environment = 'dev';
