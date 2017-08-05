@@ -61,6 +61,13 @@ class Link implements ContextAwareInterface
     private $url = '';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="added_by", type="string", length=39)
+     */
+    private $addedBy = '';
+
+    /**
      * @var Site
      *
      * @ORM\ManyToOne(targetEntity="Site", inversedBy="links")
@@ -106,6 +113,18 @@ class Link implements ContextAwareInterface
     public function setUrl(string $url): Link
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getAddedBy(): string
+    {
+        return $this->addedBy;
+    }
+
+    public function setAddedBy(string $addedBy): Link
+    {
+        $this->addedBy = $addedBy;
 
         return $this;
     }

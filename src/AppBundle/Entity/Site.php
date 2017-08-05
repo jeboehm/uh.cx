@@ -58,7 +58,7 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="previewHost", type="string", length=255, unique=true)
+     * @ORM\Column(name="preview_host", type="string", length=255, unique=true)
      * @Assert\NotBlank()
      */
     private $previewHost = '';

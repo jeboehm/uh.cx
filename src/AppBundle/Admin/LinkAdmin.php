@@ -58,6 +58,13 @@ class LinkAdmin extends AbstractAdmin
                 ]
             )
             ->add(
+                'addedBy',
+                'text',
+                [
+                    'disabled' => true,
+                ]
+            )
+            ->add(
                 'site',
                 'entity',
                 [
@@ -75,6 +82,7 @@ class LinkAdmin extends AbstractAdmin
         $list
             ->addIdentifier('name')
             ->add('url')
+            ->add('addedBy')
             ->add('site.name')
             ->add('createdAt')
             ->add('updatedAt');

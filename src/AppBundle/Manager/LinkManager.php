@@ -47,6 +47,7 @@ class LinkManager
         $link = new Link($this->contextService->getContext()->getSite());
         $link->setName($this->getFreeName());
         $link->setUrl($url);
+        $link->setAddedBy($this->contextService->getContext()->getClientIp());
 
         $this->entityManager->persist($link);
         $this->entityManager->flush();
