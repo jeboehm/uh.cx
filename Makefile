@@ -5,8 +5,8 @@ docker-image-dev = jeboehm/uh.cx:latest-dev
 travis           = $(TRAVIS)
 travis-job-id    = $(TRAVIS_JOB_ID)
 
-# Public commands
-###############
+# Targets
+#########
 .PHONY: build
 build: vendor assets container
 
@@ -25,8 +25,6 @@ commit: php-cs-fixer
 .PHONY: ci
 ci: build container-dev coveralls
 
-# Protected commands
-##################
 .PHONY: container
 container:
 	docker build -t $(docker-image) .
@@ -34,14 +32,6 @@ container:
 .PHONY: container-dev
 container-dev:
 	docker build -t $(docker-image-dev) -f Dockerfile.dev .
-
-.PHONY: vendor
-vendor:
-	if [ `which composer` ]; then make local-vendor; else make docker-vendor; fi
-
-.PHONY: assets
-assets:
-	if [ `which npm` ]; then make local-assets; else make docker-assets; fi
 
 .PHONY: phpunit
 phpunit:
@@ -82,24 +72,17 @@ docker-sync-stack:
 push:
 	docker push $(docker-image)
 
-.PHONY: local-vendor
-local-vendor:
+.PHONY: vendor
+vendor:
 	composer install --no-scripts --optimize-autoloader
 
-.PHONY: docker-vendor
-docker-vendor:
-	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html composer install --no-scripts --optimize-autoloader
-
-.PHONY: local-assets
-local-assets:
+.PHONY: assets
+assets:
 	npm install
 	node_modules/.bin/bower --allow-root install
 	node_modules/.bin/grunt
 
-.PHONY: docker-assets
-docker-assets:
-	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html node make assets
-
+.PHONY: coveralls
 coveralls: phpunit-coverage
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run -e TRAVIS=$(travis) -e TRAVIS_JOB_ID=$(travis-job-id) --rm coveralls vendor/bin/coveralls -v
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
