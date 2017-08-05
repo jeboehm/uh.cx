@@ -18,4 +18,10 @@ services:
     links:
       - db:mysql
     volumes:
-      - ./build:/build:rw
+      - ./build:/var/www/html/build:rw
+
+  coveralls:
+    image: jeboehm/uh.cx:latest-dev
+    volumes:
+      - ./build:/var/www/html/build:rw
+      - ./.git:/var/www/html/.git:rw
