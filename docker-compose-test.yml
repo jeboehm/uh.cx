@@ -18,4 +18,4 @@ services:
     links:
       - db:mysql
     volumes:
-      - ./coverage:/coverage:rw
+      - ./build:/build:rw

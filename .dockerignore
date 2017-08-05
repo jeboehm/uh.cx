@@ -1,7 +1,7 @@
 .*
 bower.*
 composer.*
-coverage/
+build/
 docker-*
 Dockerfile*
 node_modules/

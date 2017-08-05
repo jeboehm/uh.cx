@@ -21,7 +21,7 @@ coverage: build container-dev phpunit-coverage
 commit: php-cs-fixer
 
 .PHONY: ci
-ci: test
+ci: build container-dev phpunit-coverage
 
 # Protected commands
 ##################
@@ -52,7 +52,7 @@ phpunit:
 phpunit-coverage:
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml up -d app db
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage wait-mysql.sh
-	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage vendor/bin/phpunit --coverage-html=/coverage
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage vendor/bin/phpunit --coverage-clover=/build/clover.xml --coverage-html=/build/coverage_html
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
 
 .PHONY: php-cs-fixer
