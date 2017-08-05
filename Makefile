@@ -1,6 +1,10 @@
+# Variables
+#########
 docker-image     = jeboehm/uh.cx:latest
 docker-image-dev = jeboehm/uh.cx:latest-dev
 
+# Public commands
+###############
 .PHONY: build
 build: vendor assets container
 
@@ -19,6 +23,8 @@ commit: php-cs-fixer
 .PHONY: ci
 ci: test
 
+# Protected commands
+##################
 .PHONY: container
 container:
 	docker build -t $(docker-image) .
@@ -29,29 +35,11 @@ container-dev:
 
 .PHONY: vendor
 vendor:
-	if [ `which compsoser` ]; then make local-vendor; else make docker-vendor; fi
-
-.PHONY: local-vendor
-local-vendor:
-	composer install --no-scripts --optimize-autoloader
-
-.PHONY: docker-vendor
-docker-vendor:
-	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html composer install --no-scripts --optimize-autoloader
+	if [ `which composer` ]; then make local-vendor; else make docker-vendor; fi
 
 .PHONY: assets
 assets:
 	if [ `which npm` ]; then make local-assets; else make docker-assets; fi
-
-.PHONY: local-assets
-local-assets:
-	npm install
-	node_modules/.bin/bower --allow-root install
-	node_modules/.bin/grunt
-
-.PHONY: docker-assets
-docker-assets:
-	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html node make assets
 
 .PHONY: phpunit
 phpunit:
@@ -88,5 +76,23 @@ docker-sync-stack:
 	docker-sync-stack start
 
 .PHONY: push
-push: build
+push:
 	docker push $(docker-image)
+
+.PHONY: local-vendor
+local-vendor:
+	composer install --no-scripts --optimize-autoloader
+
+.PHONY: docker-vendor
+docker-vendor:
+	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html composer install --no-scripts --optimize-autoloader
+
+.PHONY: local-assets
+local-assets:
+	npm install
+	node_modules/.bin/bower --allow-root install
+	node_modules/.bin/grunt
+
+.PHONY: docker-assets
+docker-assets:
+	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html node make assets
