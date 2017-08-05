@@ -10,7 +10,9 @@ env:
 
 cache:
   directories:
+    - $HOME/.cache/composer
     - app/Resources/assets/vendor
+    - coveralls.phar
     - node_modules
     - vendor
 

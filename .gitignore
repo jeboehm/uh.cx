@@ -15,6 +15,7 @@
 /web/bundles/
 .docker-sync/
 composer.phar
+coveralls.phar
 node_modules/
 /app/Resources/assets/vendor/
 /web/css/

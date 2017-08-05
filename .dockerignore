@@ -1,6 +1,7 @@
 .*
 bower.*
 composer.*
+coveralls.phar
 build/
 docker-*
 Dockerfile*

@@ -21,7 +21,7 @@ coverage: build container-dev phpunit-coverage
 commit: php-cs-fixer
 
 .PHONY: ci
-ci: build container-dev phpunit-coverage
+ci: build container-dev phpunit-coverage coveralls
 
 # Protected commands
 ##################
@@ -50,9 +50,10 @@ phpunit:
 
 .PHONY: phpunit-coverage
 phpunit-coverage:
+	mkdir -p build/logs
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml up -d app db
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage wait-mysql.sh
-	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage vendor/bin/phpunit --coverage-clover=/build/clover.xml --coverage-html=/build/coverage_html
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage vendor/bin/phpunit --coverage-clover=/build/logs/clover.xml --coverage-html=/build/logs/html
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
 
 .PHONY: php-cs-fixer
@@ -96,3 +97,9 @@ local-assets:
 .PHONY: docker-assets
 docker-assets:
 	docker run --rm -it -v $(CURDIR):/var/www/html -w /var/www/html node make assets
+
+coveralls:
+	wget -c -nc --retry-connrefused --tries=0 https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
+	chmod +x coveralls.phar
+	./coveralls.phar --version
+	./coveralls.phar -v
