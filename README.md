@@ -2,6 +2,7 @@ uh.cx url shortener
 ===================
 
 [![Build Status](https://travis-ci.org/jeboehm/uh.cx.svg?branch=master)](https://travis-ci.org/jeboehm/uh.cx)
+[![Coverage Status](https://coveralls.io/repos/github/jeboehm/uh.cx/badge.svg?branch=master)](https://coveralls.io/github/jeboehm/uh.cx?branch=master)
 
 This is a link shortener based on Symfony 3 and PHP 7.1. It brings its own Docker environment
 so you can start immediately.
