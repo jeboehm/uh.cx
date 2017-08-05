@@ -46,14 +46,14 @@ class Hit
     /**
      * @var string
      *
-     * @ORM\Column(name="user_agent", type="string", length=400)
+     * @ORM\Column(name="user_agent", type="string", length=1000)
      */
     private $userAgent = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="referer", type="string", length=400)
+     * @ORM\Column(name="referer", type="string", length=1000)
      */
     private $referer = '';
 
