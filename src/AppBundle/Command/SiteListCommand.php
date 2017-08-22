@@ -38,7 +38,7 @@ class SiteListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $table = new Table($output);
-        $table->setHeaders(['Name', 'Default URL', 'Preview URL', 'Default Site?']);
+        $table->setHeaders(['Name', 'Default URL', 'Preview URL', 'Default Site?', 'Secure?']);
 
         /** @var Site[] $sites */
         $sites = $this->siteRepository->findAll();
@@ -50,6 +50,7 @@ class SiteListCommand extends Command
                     $site->getMainUrl(),
                     $site->getPreviewUrl(),
                     $site->isDefault() ? '✓' : '✗',
+                    $site->isSecure() ? '✓' : '✗',
                 ]
             );
         }
