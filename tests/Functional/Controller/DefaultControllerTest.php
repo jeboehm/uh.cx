@@ -93,4 +93,20 @@ class DefaultControllerTest extends AbstractFunctionalTestCase
         );
         $this->assertContains('Please specify a valid', $crawler->filter('.container .alert')->text());
     }
+
+    public function testCookieWarningCanBeDisabled(): void
+    {
+        $client = static::createClient([], ['HTTP_HOST' => self::HOST_DEFAULT, 'COOKIE_WARNING' => 'false']);
+        $crawler = $client->request('GET', $this->generateUrl($client, 'app_default_default'));
+
+        $this->assertNotContains('// EU Cookie Warning', $crawler->text());
+    }
+
+    public function testCookieWarningCanBeEnabled(): void
+    {
+        $client = static::createClient([], ['HTTP_HOST' => self::HOST_DEFAULT, 'COOKIE_WARNING' => 'true']);
+        $crawler = $client->request('GET', $this->generateUrl($client, 'app_default_default'));
+
+        $this->assertContains('// EU Cookie Warning', $crawler->text());
+    }
 }
