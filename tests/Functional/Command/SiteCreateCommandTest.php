@@ -29,27 +29,17 @@ class SiteCreateCommandTest extends AbstractFunctionalTestCase
         $commandTester = $this->createCommandTester($client);
         $commandTester->execute(
             [
-                'command'     => 'site:create',
-                'name'        => 'example',
-                'host'        => static::HOST_DEFAULT,
+                'command' => 'site:create',
+                'name' => 'example',
+                'host' => static::HOST_DEFAULT,
                 'previewHost' => 'preview.example.com',
-                '--secure'    => true,
-                '--default'   => true,
+                '--secure' => true,
+                '--default' => true,
             ]
         );
 
         $this->assertContains('host', $commandTester->getDisplay());
         $this->assertEquals(1, $commandTester->getStatusCode());
-    }
-
-    private function createCommandTester(Client $client): CommandTester
-    {
-        $application = new Application($client->getKernel());
-        $application->add($client->getContainer()->get('app.command.site_create'));
-
-        $command = $application->find('site:create');
-
-        return new CommandTester($command);
     }
 
     public function testCreateSite(): void
@@ -63,12 +53,12 @@ class SiteCreateCommandTest extends AbstractFunctionalTestCase
 
         $commandTester->execute(
             [
-                'command'     => 'site:create',
-                'name'        => $siteName,
-                'host'        => $siteHost,
+                'command' => 'site:create',
+                'name' => $siteName,
+                'host' => $siteHost,
                 'previewHost' => $sitePreviewHost,
-                '--secure'    => true,
-                '--default'   => true,
+                '--secure' => true,
+                '--default' => true,
             ]
         );
 
@@ -80,5 +70,15 @@ class SiteCreateCommandTest extends AbstractFunctionalTestCase
         $this->assertEquals($siteName, $site->getName());
         $this->assertEquals($siteHost, $site->getHost());
         $this->assertEquals($sitePreviewHost, $site->getPreviewHost());
+    }
+
+    private function createCommandTester(Client $client): CommandTester
+    {
+        $application = new Application($client->getKernel());
+        $application->add($client->getContainer()->get('app.command.site_create'));
+
+        $command = $application->find('site:create');
+
+        return new CommandTester($command);
     }
 }

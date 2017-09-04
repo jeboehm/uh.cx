@@ -23,7 +23,7 @@ class RedirectControllerTest extends AbstractFunctionalTestCase
 {
     use HelperTrait;
 
-    public function testRedirectToOriginalSite()
+    public function testRedirectToOriginalSite(): void
     {
         $client = static::createDefaultClient();
         $link = $this->createLink($client);
@@ -38,7 +38,7 @@ class RedirectControllerTest extends AbstractFunctionalTestCase
         }
     }
 
-    public function testLinkIsCaseSensitive()
+    public function testLinkIsCaseSensitive(): void
     {
         $client = static::createDefaultClient();
         $entityManager = $this->getEntityManager($client);
