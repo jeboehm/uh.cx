@@ -74,7 +74,7 @@ push:
 
 .PHONY: vendor
 vendor:
-	composer install --no-scripts --optimize-autoloader
+	composer install --no-scripts --optimize-autoloader --apcu-autoloader
 
 .PHONY: assets
 assets:
