@@ -1,8 +1,0 @@
-imports:
-    - { resource: config_prod.yml }
-    - { resource: admin.yml }
-
-framework:
-    router:
-        resource: "%kernel.root_dir%/config/routing_admin.yml"
-        strict_requirements: true

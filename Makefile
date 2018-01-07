@@ -1,12 +1,12 @@
 # Variables
-#########
+#################
 docker-image     = jeboehm/uh.cx:latest
 docker-image-dev = jeboehm/uh.cx:latest-dev
 travis           = $(TRAVIS)
 travis-job-id    = $(TRAVIS_JOB_ID)
 
-# Targets
-#########
+# Public targets
+#################
 .PHONY: build
 build: vendor assets container
 
@@ -25,6 +25,8 @@ commit: php-cs-fixer
 .PHONY: ci
 ci: build container-dev coveralls
 
+# Private targets
+#################
 .PHONY: container
 container:
 	docker build -t $(docker-image) .
@@ -57,7 +59,7 @@ clean: clean-assets clean-dev
 
 .PHONY: clean-assets
 clean-assets:
-	rm -rf vendor/ node_modules/ app/Resources/assets/vendor/ web/css/ web/fonts/ web/js/
+	rm -rf vendor/ node_modules/ public/build/
 
 .PHONY: clean-dev
 clean-dev:
@@ -77,10 +79,16 @@ vendor:
 	composer install --no-scripts --optimize-autoloader --apcu-autoloader
 
 .PHONY: assets
-assets:
+assets: node_modules
+	node_modules/.bin/encore production
+
+.PHONY: watch
+watch: node_modules
+	node_modules/.bin/encore dev --watch
+
+.PHONY: node_modules
+node_modules:
 	npm install
-	node_modules/.bin/bower --allow-root install
-	node_modules/.bin/grunt
 
 .PHONY: coveralls
 coveralls: phpunit-coverage

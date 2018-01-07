@@ -10,9 +10,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Unit\Helper;
+namespace App\Tests\Unit\Helper;
 
-use AppBundle\Helper\NameGenerator;
+use App\Helper\NameGenerator;
 use PHPUnit\Framework\TestCase;
 
 class NameGeneratorTest extends TestCase

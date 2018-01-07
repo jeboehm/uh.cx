@@ -10,16 +10,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Admin;
+namespace App\Tests\Functional\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\Functional\AbstractFunctionalTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class LinkAdminTest extends WebTestCase
+class LinkAdminTest extends AbstractFunctionalTestCase
 {
     public function testAdminListRenders(): void
     {
-        $client = static::createClient(['environment' => 'test_admin']);
+        $client = static::createClient();
         $client->request('GET', $client->getContainer()->get('router')->generate('admin_app_link_list'));
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());

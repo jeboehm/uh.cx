@@ -10,12 +10,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Command;
+namespace App\Tests\Functional\Command;
 
+use App\Tests\Functional\AbstractFunctionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Functional\AbstractFunctionalTestCase;
 
 class SiteListCommandTest extends AbstractFunctionalTestCase
 {
@@ -38,8 +38,6 @@ class SiteListCommandTest extends AbstractFunctionalTestCase
     private function createCommandTester(Client $client): CommandTester
     {
         $application = new Application($client->getKernel());
-        $application->add($client->getContainer()->get('app.command.site_list'));
-
         $command = $application->find('site:list');
 
         return new CommandTester($command);

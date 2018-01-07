@@ -10,11 +10,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Manager;
+namespace App\Tests\Functional\Manager;
 
-use AppBundle\Entity\Hit;
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
+use App\Entity\Hit;
+use App\Manager\HitManager;
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 
 class HitManagerTest extends AbstractFunctionalTestCase
 {
@@ -23,7 +24,7 @@ class HitManagerTest extends AbstractFunctionalTestCase
     public function testGetHitsSumsUpAllHits(): void
     {
         $client = static::createDefaultClient();
-        $manager = $client->getContainer()->get('app.manager.hit');
+        $manager = $client->getContainer()->get('test.' . HitManager::class);
         $link1 = $this->createLink($client);
         $link2 = $this->createLink($client);
 

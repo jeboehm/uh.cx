@@ -10,14 +10,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Command;
+namespace App\Tests\Functional\Command;
 
-use AppBundle\Entity\Site;
+use App\Entity\Site;
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
 
 class SiteCreateCommandTest extends AbstractFunctionalTestCase
 {
@@ -75,8 +75,6 @@ class SiteCreateCommandTest extends AbstractFunctionalTestCase
     private function createCommandTester(Client $client): CommandTester
     {
         $application = new Application($client->getKernel());
-        $application->add($client->getContainer()->get('app.command.site_create'));
-
         $command = $application->find('site:create');
 
         return new CommandTester($command);

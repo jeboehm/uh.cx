@@ -10,10 +10,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Controller;
+namespace App\Tests\Functional\Controller;
 
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 
 class FeedControllerTest extends AbstractFunctionalTestCase
 {

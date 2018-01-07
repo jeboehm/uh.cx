@@ -10,11 +10,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional;
+namespace App\Tests\Functional;
 
-use AppBundle\Entity\Link;
-use AppBundle\Entity\Site;
-use AppBundle\Helper\NameGenerator;
+use App\Entity\Link;
+use App\Entity\Site;
+use App\Helper\NameGenerator;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Client;
 

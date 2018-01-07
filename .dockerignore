@@ -1,13 +1,11 @@
 .*
-bower.*
-composer.*
+composer.phar
 build/
 docker-*
 Dockerfile*
 node_modules/
-Gruntfile.js
 LICENSE
 Makefile
 package.json
 README.md
-web/app_dev.php
+.git*

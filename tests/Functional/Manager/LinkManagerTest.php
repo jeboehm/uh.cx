@@ -10,13 +10,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Manager;
+namespace App\Tests\Functional\Manager;
 
-use AppBundle\Entity\Link;
-use AppBundle\Entity\Site;
-use AppBundle\Helper\NameGenerator;
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
+use App\Entity\Link;
+use App\Entity\Site;
+use App\Helper\NameGenerator;
+use App\Manager\LinkManager;
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 
 class LinkManagerTest extends AbstractFunctionalTestCase
 {
@@ -27,7 +28,7 @@ class LinkManagerTest extends AbstractFunctionalTestCase
         $client = static::createDefaultClient();
 
         $link = $this->createLink($client);
-        $manager = $client->getContainer()->get('app.manager.link');
+        $manager = $client->getContainer()->get('test.' . LinkManager::class);
 
         $client->request('GET', '/');
         $client->getContainer()->get('request_stack')->push($client->getRequest());
@@ -41,7 +42,7 @@ class LinkManagerTest extends AbstractFunctionalTestCase
 
         $entityManager = $this->getEntityManager($client);
         $site = $entityManager->getRepository(Site::class)->getDefault();
-        $manager = $client->getContainer()->get('app.manager.link');
+        $manager = $client->getContainer()->get('test.' . LinkManager::class);
 
         $client->request('GET', '/');
         $client->getContainer()->get('request_stack')->push($client->getRequest());

@@ -5,3 +5,4 @@ options:
 syncs:
   appcode-unison-sync:
     src: './'
+    sync_excludes: ['node_modules/', '.gitignore', '.git/', '.idea/', 'var/cache/']

@@ -1,0 +1,42 @@
+parameters:
+    locale: 'en'
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Tests}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    App\Form\Type\LinkType:
+        tags:
+            - { name: form.type }
+
+    App\Subscriber\Doctrine\ContextFilterSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    App\Subscriber\PreviewPageRedirectSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    App\Twig\ContextExtension:
+        tags:
+            - { name: twig.extension }
+
+    App\Twig\LinkExtension:
+        tags:
+            - { name: twig.extension }
+
+    App\Validator\Constraint\UrlBlacklistValidator:
+        tags:
+            - { name: validator.constraint_validator, alias: url_blacklist }

@@ -10,12 +10,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Controller;
+namespace App\Tests\Functional\Controller;
 
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
 
 class DefaultControllerTest extends AbstractFunctionalTestCase
 {

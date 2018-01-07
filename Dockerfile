@@ -13,9 +13,7 @@ COPY . /var/www/html/
 
 RUN bin/console cache:clear --no-warmup --env=prod && \
     bin/console cache:warmup --env=prod && \
-    bin/console cache:clear --no-warmup --env=prod_admin && \
-    bin/console cache:warmup --env=prod_admin && \
-    bin/console assets:install web --env=prod_admin && \
+    bin/console assets:install public --env=prod && \
     rm -f nginx.conf
 
 HEALTHCHECK CMD curl --fail http://localhost/ || exit 1

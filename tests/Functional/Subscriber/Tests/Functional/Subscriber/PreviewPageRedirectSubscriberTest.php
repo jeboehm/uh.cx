@@ -10,11 +10,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Subscriber;
+namespace App\Tests\Functional\Subscriber;
 
+use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Tests\Functional\AbstractFunctionalTestCase;
-use Tests\Functional\HelperTrait;
 
 class PreviewPageRedirectSubscriberTest extends AbstractFunctionalTestCase
 {

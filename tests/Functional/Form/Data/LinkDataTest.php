@@ -10,10 +10,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Functional\Form\Data;
+namespace App\Tests\Functional\Form\Data;
 
-use AppBundle\Form\Data\LinkData;
-use Tests\Functional\AbstractFunctionalTestCase;
+use App\Form\Data\LinkData;
+use App\Tests\Functional\AbstractFunctionalTestCase;
 
 class LinkDataTest extends AbstractFunctionalTestCase
 {
@@ -30,7 +30,7 @@ class LinkDataTest extends AbstractFunctionalTestCase
 
         $violations = $validator->validate($model);
 
-        $this->assertEquals($expect, $violations->count() === 0);
+        $this->assertEquals($expect, 0 === $violations->count());
     }
 
     public function dataProviderForTestUrlValidation(): array

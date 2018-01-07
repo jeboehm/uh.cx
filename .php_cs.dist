@@ -1,9 +1,8 @@
 <?php
 $finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__ . '/app')
     ->in(__DIR__ . '/src')
     ->in(__DIR__ . '/tests')
-    ->in(__DIR__ . '/web');
+    ->in(__DIR__ . '/public');
 $header = <<<EOF
 This file is part of the uh.cx package.
 

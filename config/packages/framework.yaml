@@ -1,0 +1,15 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    session:
+        handler_id: ~
+
+    #esi: ~
+    #fragments: ~
+    php_errors:
+        log: true
+
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
+
+    templating:
+        engines: ["twig"]
