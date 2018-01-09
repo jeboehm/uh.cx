@@ -1,6 +1,3 @@
-parameters:
-    locale: 'en'
-
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
