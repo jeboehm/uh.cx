@@ -1,4 +1,5 @@
 /build/
+/public/build/
 composer.phar
 node_modules/
 
