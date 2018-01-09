@@ -23,6 +23,6 @@ class UrlBlacklist extends Constraint
 
     public function validatedBy(): string
     {
-        return 'url_blacklist';
+        return UrlBlacklistValidator::class;
     }
 }

@@ -16,27 +16,3 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
-
-    App\Form\Type\LinkType:
-        tags:
-            - { name: form.type }
-
-    App\Subscriber\Doctrine\ContextFilterSubscriber:
-        tags:
-            - { name: kernel.event_subscriber }
-
-    App\Subscriber\PreviewPageRedirectSubscriber:
-        tags:
-            - { name: kernel.event_subscriber }
-
-    App\Twig\ContextExtension:
-        tags:
-            - { name: twig.extension }
-
-    App\Twig\LinkExtension:
-        tags:
-            - { name: twig.extension }
-
-    App\Validator\Constraint\UrlBlacklistValidator:
-        tags:
-            - { name: validator.constraint_validator, alias: url_blacklist }
