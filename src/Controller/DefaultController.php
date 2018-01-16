@@ -37,7 +37,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/", name="app_default_default")
-     * @Cache(smaxage=3600)
+     * @Cache(smaxage=86400)
      */
     public function defaultAction(Request $request): Response
     {
