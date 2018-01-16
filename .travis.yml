@@ -13,7 +13,6 @@ env:
 cache:
   directories:
     - $HOME/.cache/composer
-    - app/Resources/assets/vendor
     - node_modules
     - vendor
 
