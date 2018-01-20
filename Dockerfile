@@ -1,4 +1,4 @@
-FROM jeboehm/php-nginx-base:latest
+FROM jeboehm/php-nginx-base:7.1
 MAINTAINER Jeffrey Boehm "jeff@ressourcenkonflikt.de"
 
 ENV MYSQL_HOST=db \
