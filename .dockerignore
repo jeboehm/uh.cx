@@ -8,4 +8,6 @@ LICENSE
 Makefile
 package.json
 README.md
+var/log/
+var/cache/
 .git*
