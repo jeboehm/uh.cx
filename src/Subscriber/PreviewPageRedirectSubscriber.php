@@ -37,7 +37,7 @@ class PreviewPageRedirectSubscriber implements EventSubscriberInterface
 
     public function onController(FilterControllerEvent $event): void
     {
-        if (!$this->contextService->getContext()->isPreview()) {
+        if (!$this->contextService->getContext()->isPreview() || $this->contextService->getContext()->isAdmin()) {
             return;
         }
 

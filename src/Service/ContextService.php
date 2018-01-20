@@ -47,9 +47,14 @@ class ContextService
         $host = $request->getHost();
         $site = $this->siteRepository->findOneByHost($host);
         $preview = false;
+        $admin = false;
 
         if ($site->getPreviewHost() === $host) {
             $preview = true;
+        }
+
+        if (0 === strpos($request->getRequestUri(), '/admin/')) {
+            $admin = true;
         }
 
         $this->context = new ContextStruct(
@@ -57,7 +62,8 @@ class ContextService
             $preview,
             $request->getClientIp(),
             $request->headers->get('referer', ''),
-            $request->headers->get('User-Agent', '')
+            $request->headers->get('User-Agent', ''),
+            $admin
         );
 
         return $this->context;

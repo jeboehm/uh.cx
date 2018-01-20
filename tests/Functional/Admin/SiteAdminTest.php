@@ -13,14 +13,17 @@ declare(strict_types=1);
 namespace App\Tests\Functional\Admin;
 
 use App\Tests\Functional\AbstractFunctionalTestCase;
+use App\Tests\Functional\HelperTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 class SiteAdminTest extends AbstractFunctionalTestCase
 {
+    use HelperTrait;
+
     public function testAdminListRenders(): void
     {
         $client = static::createClient();
-        $client->request('GET', $client->getContainer()->get('router')->generate('admin_app_site_list'));
+        $client->request('GET', $this->generateUrl($client, 'admin_app_site_list'));
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
@@ -28,7 +31,7 @@ class SiteAdminTest extends AbstractFunctionalTestCase
     public function testAdminCreateRenders(): void
     {
         $client = static::createClient();
-        $client->request('GET', $client->getContainer()->get('router')->generate('admin_app_site_create'));
+        $client->request('GET', $this->generateUrl($client, 'admin_app_site_create'));
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }

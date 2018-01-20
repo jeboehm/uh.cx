@@ -46,6 +46,25 @@ abstract class AbstractFunctionalTestCase extends WebTestCase
         return $client;
     }
 
+    final protected static function createSite(Client $client, string $host, string $previewHost, string $name): Site
+    {
+        $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
+
+        $site = new Site();
+        $site
+            ->setHost($host)
+            ->setPreviewHost($previewHost)
+            ->setSecure(false)
+            ->setTest(false)
+            ->setDefault(true)
+            ->setName($name);
+
+        $entityManager->persist($site);
+        $entityManager->flush();
+
+        return $site;
+    }
+
     private static function prepareEnvironment(Client $client): void
     {
         $entityManager = $client->getContainer()->get('doctrine.orm.entity_manager');
@@ -59,17 +78,7 @@ abstract class AbstractFunctionalTestCase extends WebTestCase
         $entityManager->flush();
         $entityManager->clear();
 
-        $site = new Site();
-        $site
-            ->setHost(self::HOST_DEFAULT)
-            ->setPreviewHost(self::HOST_PREVIEW)
-            ->setSecure(false)
-            ->setTest(false)
-            ->setDefault(true)
-            ->setName('Testenvironment');
-
-        $entityManager->persist($site);
-        $entityManager->flush();
+        static::createSite($client, self::HOST_DEFAULT, self::HOST_PREVIEW, 'Testenvironment');
         $entityManager->clear();
     }
 }
