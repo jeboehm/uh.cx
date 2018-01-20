@@ -26,13 +26,22 @@ class ContextStruct
 
     private $userAgent;
 
-    public function __construct(Site $site, bool $preview, string $clientIp, string $referer, string $userAgent)
-    {
+    private $admin;
+
+    public function __construct(
+        Site $site,
+        bool $preview,
+        string $clientIp,
+        string $referer,
+        string $userAgent,
+        bool $admin
+    ) {
         $this->site = $site;
         $this->preview = $preview;
         $this->clientIp = $clientIp;
         $this->referer = $referer;
         $this->userAgent = $userAgent;
+        $this->admin = $admin;
     }
 
     public function getSite(): Site
@@ -58,5 +67,10 @@ class ContextStruct
     public function getUserAgent(): string
     {
         return $this->userAgent;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->admin;
     }
 }

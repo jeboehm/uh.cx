@@ -39,7 +39,9 @@ class ContextFilterSubscriber implements EventSubscriberInterface
 
     public function onKernelRequest(): void
     {
-        $this->enableContextFilter();
+        if (!$this->contextService->getContext()->isAdmin()) {
+            $this->enableContextFilter();
+        }
     }
 
     private function enableContextFilter(): void
