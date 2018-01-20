@@ -1,5 +1,15 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of the uh.cx package.
+ *
+ * (c) Jeffrey Boehm <https://github.com/jeboehm>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle::class => ['all' => true],
