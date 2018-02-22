@@ -4,9 +4,10 @@ build/
 docker-*
 Dockerfile*
 node_modules/
+vendor/
+public/build/
 LICENSE
 Makefile
-package.json
 README.md
 var/log/
 var/cache/

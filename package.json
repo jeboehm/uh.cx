@@ -4,15 +4,21 @@
   "private": true,
   "author": "Jeffrey Boehm, https://uh.cx/",
   "license": "GPL",
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production"
+  },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.17.1",
-    "bootstrap": "^3.3.7",
-    "clipboard": "^1.7.1",
-    "cookieconsent": "^3.0.4",
-    "less": "^2.7.3",
-    "less-loader": "^4.0.5"
+    "@symfony/webpack-encore": "^0.17.1"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "cookieconsent": "^3.0.4",
+    "clipboard": "^1.7.1",
     "jquery": "^3.2.1"
   }
 }

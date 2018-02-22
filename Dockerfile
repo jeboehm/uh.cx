@@ -1,5 +1,13 @@
+FROM node:9 AS node
+
+WORKDIR /var/www/html
+COPY . /var/www/html/
+
+RUN npm install && \
+    npm run build
+
 FROM jeboehm/php-nginx-base:7.1
-MAINTAINER Jeffrey Boehm "jeff@ressourcenkonflikt.de"
+LABEL maintainer="jeff@ressourcenkonflikt.de"
 
 ENV MYSQL_HOST=db \
     MYSQL_USER=root \
@@ -10,8 +18,10 @@ ENV MYSQL_HOST=db \
 
 COPY nginx.conf /etc/nginx/sites-enabled/10-docker.conf
 COPY . /var/www/html/
+COPY --from=node /var/www/html/public/build /var/www/html/public/build
 
-RUN bin/console cache:clear --no-warmup --env=prod && \
+RUN composer install --no-dev --prefer-dist -o --apcu-autoloader && \
+    bin/console cache:clear --no-warmup --env=prod && \
     bin/console cache:warmup --env=prod && \
     bin/console assets:install public --env=prod && \
     rm -f nginx.conf

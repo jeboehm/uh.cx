@@ -8,7 +8,7 @@ travis-job-id    = $(TRAVIS_JOB_ID)
 # Public targets
 #################
 .PHONY: build
-build: vendor assets container
+build: container
 
 .PHONY: dev
 dev: build container-dev docker-sync-stack
@@ -74,17 +74,9 @@ docker-sync-stack:
 push:
 	docker push $(docker-image)
 
-.PHONY: vendor
-vendor:
-	composer install --no-scripts --optimize-autoloader --apcu-autoloader
-
-.PHONY: assets
-assets: node_modules
-	node_modules/.bin/encore production
-
 .PHONY: watch
 watch: node_modules
-	node_modules/.bin/encore dev --watch
+	npm run watch
 
 .PHONY: node_modules
 node_modules:
