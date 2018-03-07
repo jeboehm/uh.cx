@@ -93,4 +93,15 @@ class DefaultControllerTest extends AbstractFunctionalTestCase
         );
         $this->assertContains('Please specify a valid', $crawler->filter('.container .alert')->text());
     }
+
+    public function testPostWithoutSubmittingTheFormDoesNotTriggerAnException(): void
+    {
+        $client = static::createDefaultClient();
+        $client->request(
+            'POST',
+            $this->generateUrl($client, 'app_default_default')
+        );
+
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    }
 }

@@ -56,7 +56,7 @@ class DefaultController extends Controller
         if ($request->isMethod('post')) {
             $form->handleRequest($request);
 
-            if ($form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid()) {
                 $link = $this->linkManager->create(
                     $data->isReuse(),
                     $data->getUrl()
