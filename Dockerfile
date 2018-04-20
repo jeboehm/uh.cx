@@ -6,7 +6,7 @@ COPY . /var/www/html/
 RUN npm install && \
     npm run build
 
-FROM jeboehm/php-nginx-base:7.1
+FROM jeboehm/php-nginx-base:7.2
 LABEL maintainer="jeff@ressourcenkonflikt.de"
 
 ENV MYSQL_HOST=db \
