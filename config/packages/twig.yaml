@@ -1,6 +1,6 @@
 parameters:
     env(GA_TRACKING): ""
-    env(COOKIE_WARNING): false
+    env:bool(COOKIE_WARNING): false
 
 twig:
     paths: ['%kernel.project_dir%/templates']
@@ -8,4 +8,4 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         ga_tracking:  "%env(GA_TRACKING)%"
-        cookie_warning:  "%env(COOKIE_WARNING)%"
+        cookie_warning:  "%env:bool(COOKIE_WARNING)%"

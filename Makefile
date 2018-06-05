@@ -8,31 +8,31 @@ travis-job-id    = $(TRAVIS_JOB_ID)
 # Public targets
 #################
 .PHONY: build
-build: container
+build: image
 
 .PHONY: dev
-dev: build container-dev docker-sync-stack
+dev: build image-dev docker-sync-stack
 
 .PHONY: test
-test: build container-dev phpunit
+test: build image-dev phpunit
 
 .PHONY: coverage
-coverage: build container-dev phpunit-coverage
+coverage: build image-dev phpunit-coverage
 
 .PHONY: commit
 commit: php-cs-fixer
 
 .PHONY: ci
-ci: build container-dev coveralls
+ci: build image-dev coveralls
 
 # Private targets
 #################
-.PHONY: container
-container:
+.PHONY: image
+image:
 	docker build -t $(docker-image) .
 
-.PHONY: container-dev
-container-dev:
+.PHONY: image-dev
+image-dev:
 	docker build -t $(docker-image-dev) -f Dockerfile.dev .
 
 .PHONY: phpunit
