@@ -9,12 +9,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-use App\CacheKernel;
 use App\Kernel;
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\HttpCache\Store;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -30,12 +27,6 @@ if ($debug) {
 }
 
 $kernel = new Kernel($environment, $debug);
-
-if (!$debug) {
-    $store = new Store($kernel->getCacheDir() . '/html');
-    $kernel = new CacheKernel($kernel, $store);
-}
-
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
