@@ -14,22 +14,16 @@ services:
   app:
     restart: always
     image: jeboehm/uh.cx:latest-dev
-    links:
-      - db:mysql
     ports:
       - "127.0.0.1:80:80"
     volumes:
-      - appcode-unison-sync:/var/www/html:nocopy
+      - ./:/var/www/html:rw
     environment:
       - SYMFONY_DEBUG=1
-      - XDEBUG_CONFIG=remote_host=192.168.178.31
+      - XDEBUG_CONFIG=remote_host=docker.for.mac.host.internal
       - PHP_IDE_CONFIG=serverName=www.uhcx.dev
       - GA_TRACKING=UA-XYZ-1
       - COOKIE_WARNING=true
 
 volumes:
   data-db:
-    driver: local
-
-  appcode-unison-sync:
-    external: true

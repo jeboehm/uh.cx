@@ -11,7 +11,7 @@ travis-job-id    = $(TRAVIS_JOB_ID)
 build: image
 
 .PHONY: dev
-dev: build image-dev docker-sync-stack
+dev: build image-dev container-dev
 
 .PHONY: test
 test: build image-dev phpunit
@@ -64,11 +64,7 @@ clean-assets:
 .PHONY: clean-dev
 clean-dev:
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml down -v
-	docker-sync clean
 
-.PHONY: docker-sync-stack
-docker-sync-stack:
-	docker-sync-stack start
 
 .PHONY: push
 push:
