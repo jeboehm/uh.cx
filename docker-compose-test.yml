@@ -6,8 +6,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: app
-    ports:
-      - "127.0.0.1:3306:3306"
 
   app:
     image: jeboehm/uh.cx:latest-dev
