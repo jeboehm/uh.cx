@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  logstash_links:
+    build:
+      dockerfile: Dockerfile
+      context: ./resources/stats
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DB=app
+    volumes:
+      - ./resources/stats/logstash_links.conf:/logstash.conf:ro
+      - ./resources/stats/data/state:/data/state:rw
+    command: ["-f", "/logstash.conf"]
+
+  logstash_hits:
+    build:
+      dockerfile: Dockerfile
+      context: ./resources/stats
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DB=app
+    volumes:
+      - ./resources/stats/logstash_hits.conf:/logstash.conf:ro
+      - ./resources/stats/data/state:/data/state:rw
+    command: ["-f", "/logstash.conf"]
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    ports:
+      - "127.0.0.1:5601:5601"

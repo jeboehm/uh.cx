@@ -12,3 +12,4 @@ README.md
 var/log/
 var/cache/
 .git*
+resources/

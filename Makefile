@@ -22,8 +22,18 @@ coverage: build image-dev phpunit-coverage
 .PHONY: commit
 commit: php-cs-fixer
 
+.PHONY: clean
+clean: clean-assets clean-dev clean-logstash clean-test clean-test
+
 .PHONY: ci
-ci: build image-dev coveralls
+ci: build image-dev phpunit-coverage coveralls clean-test
+
+.PHONY: logstash
+logstash: image image-dev phpunit
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml -f resources/stats/docker-compose.yml up -d kibana
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml -f resources/stats/docker-compose.yml up -d elasticsearch
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml -f resources/stats/docker-compose.yml up logstash_links
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml -f resources/stats/docker-compose.yml up logstash_hits
 
 # Private targets
 #################
@@ -40,7 +50,6 @@ phpunit:
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml up -d app db
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm app wait-mysql.sh
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm app vendor/bin/phpunit
-	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
 
 .PHONY: phpunit-coverage
 phpunit-coverage:
@@ -48,14 +57,14 @@ phpunit-coverage:
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml up -d app db
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage wait-mysql.sh
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run --rm coverage vendor/bin/phpunit --coverage-clover=build/logs/clover.xml --coverage-html=build/logs/html
-	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
+
+.PHONY: container-dev
+container-dev:
+	docker-compose -f docker-compose.yml -f docker-compose-dev.yml up -d
 
 .PHONY: php-cs-fixer
 php-cs-fixer:
 	vendor/bin/php-cs-fixer fix --allow-risky yes
-
-.PHONY: clean
-clean: clean-assets clean-dev
 
 .PHONY: clean-assets
 clean-assets:
@@ -65,6 +74,13 @@ clean-assets:
 clean-dev:
 	docker-compose -f docker-compose.yml -f docker-compose-dev.yml down -v
 
+.PHONY: clean-test
+clean-test:
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v
+
+.PHONY: clean-logstash
+clean-logstash:
+	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml -f resources/stats/docker-compose.yml down -v
 
 .PHONY: push
 push:
@@ -79,6 +95,5 @@ node_modules:
 	npm install
 
 .PHONY: coveralls
-coveralls: phpunit-coverage
+coveralls:
 	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml run -e TRAVIS=$(travis) -e TRAVIS_JOB_ID=$(travis-job-id) --rm coveralls vendor/bin/coveralls -v
-	docker-compose -p test -f docker-compose.yml -f docker-compose-test.yml down -v

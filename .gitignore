@@ -2,6 +2,7 @@
 /public/build/
 composer.phar
 node_modules/
+resources/stats/data/
 
 ###> symfony/framework-bundle ###
 .env
