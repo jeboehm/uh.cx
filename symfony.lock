@@ -53,6 +53,9 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         }
     },
+    "doctrine/event-manager": {
+        "version": "v1.0.0"
+    },
     "doctrine/inflector": {
         "version": "v1.2.0"
     },
@@ -67,6 +70,12 @@
     },
     "doctrine/orm": {
         "version": "v2.6.0"
+    },
+    "doctrine/persistence": {
+        "version": "v1.1.0"
+    },
+    "doctrine/reflection": {
+        "version": "v1.0.0"
     },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
@@ -233,6 +242,9 @@
     "sonata-project/datagrid-bundle": {
         "version": "2.3.1"
     },
+    "sonata-project/doctrine-extensions": {
+        "version": "1.2.0"
+    },
     "sonata-project/doctrine-orm-admin-bundle": {
         "version": "3.3.0"
     },
@@ -274,6 +286,9 @@
             "version": "3.3",
             "ref": "9f94d3ea453cd8a3b95db7f82592d7344fe3a76a"
         }
+    },
+    "symfony/contracts": {
+        "version": "v1.0.2"
     },
     "symfony/css-selector": {
         "version": "v4.0.3"
@@ -410,6 +425,18 @@
             "ref": "85834af1496735f28d831489d12ab1921a875e0d"
         }
     },
+    "symfony/security-core": {
+        "version": "v4.2.6"
+    },
+    "symfony/security-csrf": {
+        "version": "v4.2.6"
+    },
+    "symfony/security-guard": {
+        "version": "v4.2.6"
+    },
+    "symfony/security-http": {
+        "version": "v4.2.6"
+    },
     "symfony/stopwatch": {
         "version": "v4.0.2"
     },
@@ -442,6 +469,9 @@
     },
     "symfony/var-dumper": {
         "version": "v4.0.2"
+    },
+    "symfony/var-exporter": {
+        "version": "v4.2.6"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",

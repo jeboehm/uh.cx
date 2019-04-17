@@ -16,12 +16,12 @@ use App\Entity\Hit;
 use App\Exception\LinkNotFoundException;
 use App\Manager\HitManager;
 use App\Manager\LinkManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
-class InfoController extends Controller
+class InfoController extends AbstractController
 {
     private $linkManager;
 

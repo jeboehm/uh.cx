@@ -17,12 +17,12 @@ use App\Exception\LinkNotFoundException;
 use App\Manager\HitManager;
 use App\Manager\LinkManager;
 use App\Service\ContextService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
-class RedirectController extends Controller
+class RedirectController extends AbstractController
 {
     private $linkManager;
 

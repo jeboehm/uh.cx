@@ -14,10 +14,10 @@ namespace App\Twig;
 
 use App\Service\ContextService;
 use DateTime;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ContextExtension extends Twig_Extension
+class ContextExtension extends AbstractExtension
 {
     private $contextService;
 
@@ -29,10 +29,10 @@ class ContextExtension extends Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new Twig_SimpleFunction('context_site_title', [$this, 'getSiteTitle']),
-            new Twig_SimpleFunction('context_test_mode', [$this, 'isTest']),
-            new Twig_SimpleFunction('context_site_creation_date', [$this, 'getSiteCreationDate']),
-            new Twig_SimpleFunction('context_site_main_url', [$this, 'getSiteMainUrl']),
+            new TwigFunction('context_site_title', [$this, 'getSiteTitle']),
+            new TwigFunction('context_test_mode', [$this, 'isTest']),
+            new TwigFunction('context_site_creation_date', [$this, 'getSiteCreationDate']),
+            new TwigFunction('context_site_main_url', [$this, 'getSiteMainUrl']),
         ];
     }
 
